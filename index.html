@@ -1,12 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YonkeStation</title>
+    <title>YonkeStation | Reviviendo el Juego</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    
+
+    <!-- Fondo con rejilla cyberpunk y efectos de neón -->
+    <div class="cyber-background">
+        <div class="grid-overlay"></div>
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <main class="linktree-container">
+        
+        <!-- Perfil / Header -->
+        <header class="profile-header">
+            <div class="avatar-container">
+                <div class="avatar-glow"></div>
+                <div class="avatar-frame">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+            </div>
+            <h1 class="profile-title">YonkeStation</h1>
+            <p class="profile-slogan">"reviviendo el juego"</p>
+            <span class="profile-owner">Por David González</span>
+            <div>Ensamble, Mantenimiento, Diagnóstico y Actualización de PCs, Laptops Gamer y Consolas de Videojuegos</div>
+            <div class="domicilio">Servicio a domicilio en CDMX y Estado de México</div>
+        </header>
+
+        <!-- Sección Destacada: Último Contenido / Video de YouTube -->
+        <section class="video-showcase">
+            <div class="showcase-header">
+                <i class="fa-solid fa-play-circle"></i>
+                <span>Último Video Épico</span>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <!-- Iframe configurado con tu canal y video más reciente -->
+                    <iframe 
+                        src="https://www.youtube-nocookie.com/embed/cVD6yatyIcU" 
+                        title="Último video de YonkeStation" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <div class="video-info">
+                    <h3>Mantenimiento y Reparación de Hardware</h3>
+                    <p>PCs Gamer, Laptops Profesionales y Consolas al límite.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Enlaces / Links tipo Linktree -->
+        <nav class="links-nav">
+            
+            <a href="https://www.youtube.com/@YonkeStation" target="_blank" rel="noopener noreferrer" class="link-btn youtube">
+                <div class="btn-content">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span>Canal de YouTube</span>
+                </div>
+                <i class="fa-solid fa-arrow-right arrow-icon"></i>
+            </a>
+
+            <a href="https://tiktok.com/@yonkestation" target="_blank" rel="noopener noreferrer" class="link-btn tiktok">
+                <div class="btn-content">
+                    <i class="fa-brands fa-tiktok"></i>
+                    <span>TikTok</span>
+                </div>
+                <i class="fa-solid fa-arrow-right arrow-icon"></i>
+            </a>
+
+            <a href="https://instagram.com/yonkestation" target="_blank" rel="noopener noreferrer" class="link-btn instagram">
+                <div class="btn-content">
+                    <i class="fa-brands fa-instagram"></i>
+                    <span>Instagram</span>
+                </div>
+                <i class="fa-solid fa-arrow-right arrow-icon"></i>
+            </a>
+
+            <a href="https://facebook.com/yonkestation" target="_blank" rel="noopener noreferrer" class="link-btn facebook">
+                <div class="btn-content">
+                    <i class="fa-brands fa-facebook"></i>
+                    <span>Facebook</span>
+                </div>
+                <i class="fa-solid fa-arrow-right arrow-icon"></i>
+            </a>
+
+        </nav>
+
+        <!-- Botón de Contacto Directo WhatsApp (Número real integrado) -->
+        <div class="contact-section">
+            <a href="https://wa.me/525582211277?text=Hola%20David,%20necesito%20cotización%20para%20mi%20equipo/consola" target="_blank" rel="noopener noreferrer" class="whatsapp-btn">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>Cotiza por WhatsApp hoy mismo</span>
+                <span class="pulse-dot"></span>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>&copy; 2026 YonkeStation &bull; Todos los derechos reservados</p>
+        </footer>
+
+    </main>
+
 </body>
 </html>
