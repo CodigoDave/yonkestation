@@ -34,16 +34,6 @@ body {
     padding: 2rem 1rem;
 }
 
-.domicilio {
-    font-size: .98rem;
-    color: var(--neon-green);
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    text-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
-    margin-top: 0.5rem;
-}
-
 /* ==========================================
    FONDO ANIMADO CON REJILLA CYBERPUNK
    ========================================== */
@@ -121,7 +111,7 @@ body {
 }
 
 /* ==========================================
-   HEADER Y PERFIL
+   HEADER Y PERFIL (Foto Circular Estilo Neón)
    ========================================== */
 .profile-header {
     text-align: center;
@@ -133,17 +123,18 @@ body {
 
 .avatar-container {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 120px; /* Tamaño perfecto para foto circular de perfil */
+    height: 120px;
     margin-bottom: 0.5rem;
 }
 
+/* Halo de luz neón animado alrededor del círculo */
 .avatar-glow {
     position: absolute;
-    inset: -5px;
+    inset: -6px;
     background: linear-gradient(45deg, var(--neon-cyan), var(--neon-magenta));
     border-radius: 50%;
-    filter: blur(10px);
+    filter: blur(12px);
     opacity: 0.8;
     animation: pulseGlow 3s ease-in-out infinite alternate;
 }
@@ -158,19 +149,26 @@ body {
     width: 100%;
     height: 100%;
     background: #0e111a;
-    border: 2px solid var(--neon-cyan);
-    border-radius: 50%;
+    border: 3px solid var(--neon-cyan); /* Marco cian brillante */
+    border-radius: 50%; /* Vuelve el marco un círculo perfecto */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.5rem;
-    color: var(--neon-cyan);
-    box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.4);
+    overflow: hidden;
+    box-shadow: inset 0 0 15px rgba(0, 240, 255, 0.5);
+}
+
+/* Ajusta la foto para que llene el círculo de forma impecable sin deformarse */
+.avatar-frame img.profile-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta sutilmente los bordes para llenar el círculo exacto */
+    border-radius: 50%;
 }
 
 .profile-title {
     font-family: var(--font-heading);
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 900;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -194,6 +192,21 @@ body {
     color: var(--text-muted);
     letter-spacing: 1px;
     text-transform: uppercase;
+}
+
+.profile-desc {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    max-width: 450px;
+    margin-top: 0.2rem;
+}
+
+.domicilio {
+    font-size: 0.85rem;
+    color: var(--neon-cyan);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
 }
 
 /* ==========================================
@@ -230,7 +243,7 @@ body {
 .video-wrapper {
     position: relative;
     width: 100%;
-    padding-top: 56.25%; /* Relación de aspecto 16:9 ideal para video */
+    padding-top: 56.25%;
     background: #000;
     border-radius: 10px;
     overflow: hidden;
@@ -321,10 +334,16 @@ body {
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
-/* Efectos hover personalizados por red social */
+.link-btn.youtube:hover {
+    border-color: #ff0000;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+    transform: scale(1.02);
+}
+.link-btn.youtube:hover i:first-child { color: #ff0000; }
+
 .link-btn.tiktok:hover {
     border-color: #ff0050;
-    box-shadow: 0 0 20px rgba(255, 0, 80, 0.4);
+    box-shadow: 0 0 20px rgba(255, 0, 50, 0.4);
     transform: scale(1.02);
 }
 .link-btn.tiktok:hover i:first-child { color: #ff0050; }
@@ -342,13 +361,6 @@ body {
     transform: scale(1.02);
 }
 .link-btn.facebook:hover i:first-child { color: #1877f2; }
-
-.link-btn.youtube:hover {
-    border-color: #ff0000;
-    box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
-    transform: scale(1.02);
-}
-.link-btn.youtube:hover i:first-child { color: #ff0000; }
 
 .link-btn:hover .arrow-icon {
     transform: translateX(5px);
