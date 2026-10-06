@@ -35,7 +35,7 @@ body {
 }
 
 .domicilio {
-    font-size: 0.7rem;
+    font-size: .98rem;
     color: var(--neon-green);
     font-weight: 700;
     letter-spacing: 1px;
