@@ -2,12 +2,11 @@ name: Actualizar Ultimo Video YouTube
 
 on:
   schedule:
-    # Se ejecuta automáticamente cada 6 horas
     - cron: '0 */6 * * *'
-  workflow_dispatch: # Para forzarlo manual cuando quieras
+  workflow_dispatch:
 
 permissions:
-  contents: write # 👈 Esto le da permiso directo al robot para modificar archivos sin errores
+  contents: write
 
 jobs:
   update-video:
@@ -41,14 +40,18 @@ jobs:
               
               ns = {"yt": "http://www.youtube.com/xml/schemas/2015", "atom": "http://www.w3.org/2005/Atom"}
               
-              entry = root.find("atom:entry", ns)
-              if entry is not None:
-                  video_id = entry.find("yt:videoId", ns).text
-                  print(f"Último video encontrado: {video_id}")
+              # Buscar todas las entradas y tomar la primera (la más reciente del feed)
+              entries = root.findall("atom:entry", ns)
+              if entries:
+                  # Ordenar o asegurar que tomamos la primera de la lista
+                  latest_entry = entries[0]
+                  video_id = latest_entry.find("yt:videoId", ns).text
+                  print(f"¡Último video exacto detectado!: {video_id}")
                   
                   with open("index.html", "r", encoding="utf-8") as f:
                       html_content = f.read()
                   
+                  # Reemplazar el embed de YouTube en el index.html
                   new_html = re.sub(
                       r"https://www.youtube-nocookie\.com/embed/[a-zA-Z0-9_-]+",
                       f"https://www.youtube-nocookie.com/embed/{video_id}",
@@ -57,15 +60,15 @@ jobs:
                   
                   with open("index.html", "w", encoding="utf-8") as f:
                       f.write(new_html)
-                  print("index.html actualizado exitosamente.")
+                  print("index.html actualizado con el video más reciente.")
               else:
-                  print("No se encontró ninguna entrada en el feed RSS.")
+                  print("No se encontraron videos en el feed.")
           except Exception as e:
-              print(f"Error al actualizar el video: {e}")
+              print(f"Error al actualizar: {e}")
           '
 
       - name: Guardar y subir cambios al repositorio
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Auto-actualización del último video de YouTube [skip ci]"
+          commit_message: "Actualización automática al video más reciente [skip ci]"
           branch: main
