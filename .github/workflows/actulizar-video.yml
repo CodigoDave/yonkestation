@@ -1,0 +1,71 @@
+name: Actualizar Ultimo Video YouTube
+
+on:
+  schedule:
+    # Se ejecuta automáticamente cada 6 horas
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Te permite darle clic a un botón en GitHub para ejecutarlo manualmente cuando quieras
+
+jobs:
+  update-video:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clonar Repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Ejecutar script de actualización
+        env:
+          YOUTUBE_CHANNEL_ID: 'UCvH2-ALYopdaoSHx11fVScw'
+        run: |
+          python -c '
+          import urllib.request
+          import xml.etree.ElementTree as ET
+          import os
+          import re
+
+          channel_id = os.environ["YOUTUBE_CHANNEL_ID"]
+          url = f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
+          
+          try:
+              req = urllib.request.urlopen(url)
+              xml_data = req.read()
+              root = ET.fromstring(xml_data)
+              
+              # Namespace de YouTube para el feed RSS
+              ns = {"yt": "http://www.youtube.com/xml/schemas/2015", "atom": "http://www.w3.org/2005/Atom"}
+              
+              # Obtener el video más reciente
+              entry = root.find("atom:entry", ns)
+              if entry is not None:
+                  video_id = entry.find("yt:videoId", ns).text
+                  print(f"Último video encontrado: {video_id}")
+                  
+                  # Leer el index.html actual
+                  with open("index.html", "r", encoding="utf-8") as f:
+                      html_content = f.read()
+                  
+                  # Reemplazar el link del iframe anterior por el nuevo ID
+                  new_html = re.sub(
+                      r"https://www.youtube-nocookie\.com/embed/[a-zA-Z0-9_-]+",
+                      f"https://www.youtube-nocookie.com/embed/{video_id}",
+                      html_content
+                  )
+                  
+                  # Guardar los cambios en index.html
+                  with open("index.html", "w", encoding="utf-8") as f:
+                      f.write(new_html)
+                  print("index.html actualizado exitosamente con el último video.")
+          except Exception as e:
+              print(f"Error al actualizar el video: {e}")
+          '
+
+      - name: Guardar y subir cambios al repositorio
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Auto-actualización del último video de YouTube [skip ci]"
+          branch: main
